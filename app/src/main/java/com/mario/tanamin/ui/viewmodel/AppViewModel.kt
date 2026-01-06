@@ -23,6 +23,18 @@ class AppViewModel(application: Application) : AndroidViewModel(application) {
 
     init {
         viewModelScope.launch {
+            // Initializing Session Holder First
+            val userId = sessionManager.getUserId()
+            val token = sessionManager.getToken()
+            if (userId != null && token != null) {
+                com.mario.tanamin.data.session.InMemorySessionHolder.userId = userId
+                com.mario.tanamin.data.session.InMemorySessionHolder.token = token
+                refreshTheme()
+            } else {
+                _activeTheme.value = null
+            }
+        }
+        viewModelScope.launch {
             sessionManager.userIdFlow.collectLatest { userId ->
                 if (userId != null) {
                     refreshTheme()
@@ -32,6 +44,7 @@ class AppViewModel(application: Application) : AndroidViewModel(application) {
             }
         }
     }
+
 
     fun refreshTheme() {
         viewModelScope.launch {

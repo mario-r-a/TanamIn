@@ -35,7 +35,7 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.mario.tanamin.ui.view.CourseView
 import com.mario.tanamin.ui.view.LoginView
-//import com.mario.tanamin.ui.view.HomeView
+import com.mario.tanamin.ui.view.HomeView
 import com.mario.tanamin.ui.view.WalletView
 import com.mario.tanamin.ui.view.ProfileView
 import com.mario.tanamin.ui.view.PocketDetailView
@@ -134,9 +134,7 @@ fun TanamInAppRoute(
                     )
                 }
                 composable(route = AppView.Home.name) {
-                    // HomeView(navController = navController)
-                    // Sementara text dulu agar tidak error saat navigasi
-                    Text("Home Screen Placeholder", modifier = Modifier.padding(50.dp))
+                    HomeView(navController = navController)
                 }
                 composable(route = AppView.Wallet.name) {
                     WalletView(navController = navController)
